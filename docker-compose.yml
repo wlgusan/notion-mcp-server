@@ -1,6 +1,19 @@
+version: '3.8'
+
 services:
   notion-mcp-server:
-    build: .
+    image: mcp/notion:latest
+    container_name: notion-mcp-server
     stdin_open: true
     tty: true
+    environment:
+      - OPENAPI_MCP_HEADERS={"Authorization":"Bearer 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","Notion-Version":"2022-06-28"}
+    ports:
+      - "3000:3000"
     restart: unless-stopped
+    networks:
+      - notion-network
+
+networks:
+  notion-network:
+    driver: bridge
